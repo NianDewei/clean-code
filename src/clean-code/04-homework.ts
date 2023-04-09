@@ -1,79 +1,72 @@
-(() => {
+;(() => {
+	// Resolver sin la triple condicional dentro del if
+	// includes? arrays?
+	function isRedFruit(fruit: string): boolean {
+		//?option 01
+		// const ifIsAnFruit =
+		// 	fruit === "manzana" || fruit === "cereza" || fruit === "ciruela"
+		// return ifIsAnFruit ? true : false
 
+		//?option 02
+		const fruitNames: Array<string> = ["manzana", "cereza", "ciruela"]
+		return fruitNames.includes(fruit)
+	}
 
-    // Resolver sin la triple condicional dentro del if
-    // includes? arrays?
-    function isRedFruit( fruit: string ): boolean {
-        
-        if ( fruit === 'manzana' || fruit === 'cereza' || fruit === 'ciruela' ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+	// Simplificar esta función
+	// switch? Object literal? validar posibles colores
+	interface ColorByFruits {
+		[index: string]: Array<string>
+		red: Array<string>
+		yellow: Array<string>
+		purple: Array<string>
+	}
 
-    // Simplificar esta función
-    // switch? Object literal? validar posibles colores
-    function getFruitsByColor( color: string ): string[] {
+	function getFruitsByColor(color: string): Array<string> {
+		const fruits: ColorByFruits = {
+			red: ["manzana", "fresa"],
+			yellow: ["piña", "banana"],
+			purple: ["moras", "uvas"]
+		}
 
-        if ( color === 'red' ) {
-            return ['manzana','fresa'];
-        } else if ( color === 'yellow') {
-            return ['piña','banana'];
-        } else if ( color === 'purple') {
-            return ['moras','uvas']
-        } else {
-            throw Error('the color must be: red, yellow, purple');
-        }
-    }
+		const hasFruits = fruits[color]
+		if (hasFruits) return hasFruits
 
-    // Simplificar esta función
-    let isFirstStepWorking  = true;
-    let isSecondStepWorking = true;
-    let isThirdStepWorking  = true;
-    let isFourthStepWorking = true;
+		throw Error("the color must be: red, yellow, purple")
+	}
 
-    function workingSteps() {
-        if( isFirstStepWorking === true ) {
-            if( isSecondStepWorking === true ) {
-                if( isThirdStepWorking === true ) {
-                    if( isFourthStepWorking === true ) {
-                        return 'Working properly!';
-                    }
-                    else {
-                        return 'Fourth step broken.';
-                    }
-                }
-                else {
-                    return 'Third step broken.';
-                }
-            }
-            else {
-                return 'Second step broken.';
-            }
-        }
-        else {
-            return 'First step broken.';
-        }
-    }
+	interface Steps {
+		name: string
+		status: boolean
+	}
 
+	const stepsWorking: Array<Steps> = [
+		{ status: false, name: "First" },
+		{ status: true, name: "Second" },
+		{ status: true, name: "Third" },
+		{ status: true, name: "Four" }
+	]
 
-    // isRedFruit
-    console.log({ isRedFruit: isRedFruit('cereza'), fruit: 'cereza' }); // true
-    console.log({ isRedFruit: isRedFruit('piña'), fruit: 'piña' }); // true
+	function workingSteps() {
+		const allStepsCompleted = stepsWorking.every(({ status }) => status)
+		const stepsBroken = stepsWorking.filter(({ status }) => !status)
+		const lastStepBroken = stepsBroken.slice(-1)[0]
 
-    //getFruitsByColor
-    console.log({ redFruits: getFruitsByColor('red') }); // ['manzana', 'fresa']
-    console.log({ yellowFruits: getFruitsByColor('yellow') }); // ['piña', 'banana']
-    console.log({ purpleFruits: getFruitsByColor('purple') }); // ['moras', 'uvas']
-    // console.log({ pinkFruits: getFruitsByColor('pink') }); // Error: the color must be: red, yellow, purple
+		if (allStepsCompleted) return "Working properly!"
+		if (stepsBroken.length === 1) return `${stepsBroken[0].name} step broken.`
 
-    // workingSteps
-    console.log({ workingSteps: workingSteps() }); // Cambiar los valores de la línea 31 y esperar los resultados
+		return `Broke from the pass ${stepsBroken[0].name} to ${lastStepBroken.name}`
+	}
 
+	// isRedFruit
+	console.log({ isRedFruit: isRedFruit("cereza"), fruit: "cereza" }) // true
+	console.log({ isRedFruit: isRedFruit("piña"), fruit: "piña" }) // false
 
-})();
+	//getFruitsByColor
+	console.log({ redFruits: getFruitsByColor("red") }) // ['manzana', 'fresa']
+	console.log({ yellowFruits: getFruitsByColor("yellow") }) // ['piña', 'banana']
+	console.log({ purpleFruits: getFruitsByColor("purple") }) // ['moras', 'uvas']
+	// console.log({ pinkFruits: getFruitsByColor("pink") }) // Error: the color must be: red, yellow, purple
 
-
-
-
+	// workingSteps
+	console.log({ workingSteps: workingSteps() }) // Cambiar los valores de la línea 31 y esperar los resultados
+})()
