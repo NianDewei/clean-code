@@ -2,8 +2,7 @@ import "./style.css"
 import typescriptLogo from "./typescript.svg"
 import viteLogo from "/vite.svg"
 import { setupCounter } from "./counter"
-// import "./clean-code/06-classes-a"
-import "./clean-code/06-classes-b"
+import "./clean-code/06-classes-c"
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
