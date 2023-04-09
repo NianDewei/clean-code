@@ -2,12 +2,6 @@
 	// Resolver sin la triple condicional dentro del if
 	// includes? arrays?
 	function isRedFruit(fruit: string): boolean {
-		//?option 01
-		// const ifIsAnFruit =
-		// 	fruit === "manzana" || fruit === "cereza" || fruit === "ciruela"
-		// return ifIsAnFruit ? true : false
-
-		//?option 02
 		const fruitNames: Array<string> = ["manzana", "cereza", "ciruela"]
 		return fruitNames.includes(fruit)
 	}
@@ -47,14 +41,12 @@
 	]
 
 	function workingSteps() {
+		const stepBroken = stepsWorking.find(({ status }) => !status)
 		const allStepsCompleted = stepsWorking.every(({ status }) => status)
-		const stepsBroken = stepsWorking.filter(({ status }) => !status)
-		const lastStepBroken = stepsBroken.slice(-1)[0]
 
-		if (allStepsCompleted) return "Working properly!"
-		if (stepsBroken.length === 1) return `${stepsBroken[0].name} step broken.`
-
-		return `Broke from the pass ${stepsBroken[0].name} to ${lastStepBroken.name}`
+		return allStepsCompleted
+			? "Working properly!"
+			: `${stepBroken!.name} step broken.`
 	}
 
 	// isRedFruit
