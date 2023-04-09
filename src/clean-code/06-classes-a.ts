@@ -1,5 +1,5 @@
 ;(() => {
-	// No aplicando el principio de responsabilidad única
+	//! Not applying the principle of single responsibility
 
 	type Gender = "M" | "F"
 
