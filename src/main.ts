@@ -2,7 +2,7 @@ import "./style.css"
 import typescriptLogo from "./typescript.svg"
 import viteLogo from "/vite.svg"
 import { setupCounter } from "./counter"
-import "./solid/01-applying-srp"
+import "./solid/02-open-close-a"
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
