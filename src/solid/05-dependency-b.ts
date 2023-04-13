@@ -1,23 +1,21 @@
-import { LocalDataBaseService } from "./05-dependency-c";
-
-interface Post {
-    body:   string;
-    id:     number;
-    title:  string;
-    userId: number;
+export interface Post {
+	body: string
+	id: number
+	title: string
+	userId: number
 }
 
+export abstract class PostsProvider {
+	abstract getPosts(): Promise<Array<Post>>
+}
 
 export class PostService {
+	private posts: Array<Post> = []
 
-    private posts: Post[] = [];
+	constructor(private _postProvider: PostsProvider) {}
 
-    constructor() {}
-
-    async getPosts() {
-        const jsonDB = new LocalDataBaseService();
-        this.posts = await jsonDB.getFakePosts();
-
-        return this.posts;
-    }
+	async getPosts() {
+		this.posts = await this._postProvider.getPosts()
+		return this.posts
+	}
 }
